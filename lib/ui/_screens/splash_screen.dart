@@ -16,17 +16,19 @@ class _SplashPageState extends State<SplashPage> {
     return EasySplashScreen(
       logo: Image.asset(
         "images/staylit.png",
+        filterQuality: FilterQuality.high,
         alignment: Alignment.bottomCenter,
       ),
-      backgroundColor: Color.fromARGB(255, 15, 31, 45),
+      backgroundColor: const Color.fromARGB(255, 15, 31, 45),
       showLoader: true,
+      logoWidth: 150,
       loaderColor: Colors.white,
-      loadingText: Text(
+      loadingText: const Text(
         "Loading...",
         style: TextStyle(color: Colors.white),
       ),
-      navigator: LoginScreen(),
-      durationInSeconds: 5,
+      navigator: const LoginScreen(),
+      durationInSeconds: 3,
     );
   }
 }

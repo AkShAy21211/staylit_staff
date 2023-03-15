@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:staylit/ui/_screens/home_screen.dart';
+import 'package:staylit/ui/_screens/about_us_screen.dart';
+import 'package:staylit/ui/_screens/home_screen/home_screen.dart';
 import 'package:staylit/ui/_screens/login_screen.dart';
 import 'package:staylit/ui/_screens/profile_screen.dart';
 import 'package:staylit/ui/_screens/setting_screen.dart';
@@ -10,17 +11,17 @@ class DrawwerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: const Color.fromARGB(255, 15, 31, 45),
+      backgroundColor: Color.fromARGB(99, 0, 0, 0),
       child: Column(
         children: <Widget>[
           Container(
             margin: const EdgeInsets.only(
               top: 30,
-              bottom: 10,
+              bottom: 40,
             ),
             width: double.infinity,
             padding: const EdgeInsets.all(20),
-            color: const Color.fromARGB(255, 25, 60, 89),
+            color: Color.fromARGB(99, 0, 0, 0),
             child: Center(
               child: Column(
                 children: <Widget>[
@@ -60,7 +61,7 @@ class DrawwerScreen extends StatelessWidget {
             ),
             title: InkWell(
               onTap: () {
-                Navigator.pushReplacement(context,
+                Navigator.push(context,
                     MaterialPageRoute(builder: (context) => HomeScreen()));
               },
               child: const Text(
@@ -71,39 +72,16 @@ class DrawwerScreen extends StatelessWidget {
           ),
           ListTile(
             leading: IconButton(
-              icon: const Icon(Icons.person),
-              onPressed: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => const ProfileScreen(),
-                  ),
-                );
-              },
-              color: Colors.white,
-            ),
-            title: InkWell(
-              onTap: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => ProfileScreen()));
-              },
-              child: const Text(
-                "Profile",
-                style: TextStyle(fontSize: 15, color: Colors.white),
-              ),
-            ),
-          ),
-          ListTile(
-            leading: IconButton(
               icon: const Icon(Icons.settings),
               onPressed: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => const SettingScreen()));
               },
               color: Colors.white,
             ),
             title: InkWell(
               onTap: () {
-                Navigator.pushReplacement(context,
+                Navigator.push(context,
                     MaterialPageRoute(builder: (context) => SettingScreen()));
               },
               child: const Text(
@@ -115,17 +93,15 @@ class DrawwerScreen extends StatelessWidget {
           ),
           ListTile(
             leading: IconButton(
-              icon: const Icon(Icons.home),
+              icon: const Icon(Icons.exit_to_app),
               onPressed: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const LoginScreen()));
+                Navigator.of(context).popUntil((route) => route.isFirst);
               },
               color: Colors.white,
             ),
             title: InkWell(
               onTap: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => LoginScreen()));
+                Navigator.of(context).popUntil((route) => route.isFirst);
               },
               child: const Text(
                 "Logout",

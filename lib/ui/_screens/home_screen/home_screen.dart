@@ -1,30 +1,21 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:staylit/ui/_screens/about_us_screen.dart';
 import 'package:staylit/ui/_screens/booking_screen.dart';
 import 'package:staylit/ui/_screens/drawer_screen.dart';
-import 'package:staylit/ui/_screens/login_screen.dart';
 import 'package:staylit/ui/_screens/pastrequest_screen.dart';
-import 'package:staylit/ui/_screens/profile_screen.dart';
 import 'package:staylit/ui/_screens/request_screen.dart';
 import 'package:staylit/ui/_screens/setting_screen.dart';
 import 'package:staylit/ui/_screens/wating_list_screen.dart';
 
-class SettingScreen extends StatelessWidget {
-  const SettingScreen({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
+        drawer: const DrawwerScreen(),
         appBar: AppBar(
-          title: Text("Settings"),
-          leading: IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: Icon(Icons.arrow_back),
-          ),
           backgroundColor: const Color.fromARGB(255, 15, 31, 45),
         ),
         backgroundColor: const Color.fromARGB(255, 15, 31, 45),
@@ -34,7 +25,7 @@ class SettingScreen extends StatelessWidget {
               child: Column(
                 children: [
                   const Padding(
-                    padding: EdgeInsets.only(right: 250, top: 30),
+                    padding: EdgeInsets.only(right: 250, top: 20),
                   ),
                   const SizedBox(
                     height: 20,
@@ -51,27 +42,75 @@ class SettingScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(0),
                         child: GridView.count(
                           childAspectRatio: MediaQuery.of(context).size.width /
-                              (MediaQuery.of(context).size.height / 4),
+                              (MediaQuery.of(context).size.height / 2),
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          crossAxisCount: 1,
+                          crossAxisCount: 2,
                           crossAxisSpacing: 1,
                           mainAxisSpacing: 1,
                           children: [
                             Column(
                               children: [
                                 const SizedBox(
-                                  height: 30,
+                                  height: 50,
                                 ),
                                 ServiceButton(
-                                    icon: Icons.person,
+                                    icon: MdiIcons.phone,
                                     onPressed: () {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  ProfileScreen()));
+                                                  const RequestScreen()));
                                     },
-                                    text: "Edit Profile")
+                                    text: "Service Request")
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                const SizedBox(
+                                  height: 50,
+                                ),
+                                ServiceButton(
+                                    icon: MdiIcons.phoneClock,
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const PastRequestScreen()));
+                                    },
+                                    text: "Past Service\nRequest")
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                ServiceButton(
+                                    icon: MdiIcons.clock,
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  WatingListScreen()));
+                                    },
+                                    text: "Wating List")
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                ServiceButton(
+                                    icon: MdiIcons.book,
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const BookingScreen()));
+                                    },
+                                    text: " Bookings")
                               ],
                             ),
                             Column(
@@ -80,30 +119,14 @@ class SettingScreen extends StatelessWidget {
                                   height: 20,
                                 ),
                                 ServiceButton(
-                                    icon: MdiIcons.information,
+                                    icon: Icons.settings,
                                     onPressed: () {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  const AboutUsScreen()));
+                                                  const SettingScreen()));
                                     },
-                                    text: "About")
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                ServiceButton(
-                                    icon: MdiIcons.logout,
-                                    onPressed: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  LoginScreen()));
-                                    },
-                                    text: "LogOut")
+                                    text: " Settings")
                               ],
                             ),
                           ],

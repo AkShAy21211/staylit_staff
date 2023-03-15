@@ -1,153 +1,128 @@
 import 'package:flutter/material.dart';
-import 'package:staylit/ui/_screens/drawer_screen.dart';
+import 'package:staylit/widgets/custom_button.dart';
+import 'package:staylit/widgets/custom_profile_button.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+class ProfileScreen extends StatefulWidget {
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
 
-  // This widget is the root of your application.
+class _ProfileScreenState extends State<ProfileScreen> {
+  String _name = "John Doe";
+  String _job = "Cleaning";
+  String _email = "johndoe@example.com";
+  String _phone = "123-456-7890";
+  String _address = "123 Main St, Anytown USA";
+
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
     return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: const Color.fromARGB(255, 15, 31, 45),
+      home: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 15, 31, 45),
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: Icon(Icons.arrow_back),
           ),
-          drawer: const DrawwerScreen(),
           backgroundColor: const Color.fromARGB(255, 15, 31, 45),
-          body: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: SingleChildScrollView(
-              child: Column(children: [
-                const SizedBox(
-                  height: 50,
+          title: Text('Edit Profile'),
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(height: 20),
+                CircleAvatar(
+                  radius: 50,
+                  backgroundImage: NetworkImage(
+                      'https://www.w3schools.com/w3images/avatar2.png'),
                 ),
-                Stack(
-                  children: [
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle, color: Colors.white),
-                      child: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.camera_alt_outlined,
-                            size: 40,
-                          )),
-                    ),
-                  ],
+                SizedBox(height: 20),
+                CustomProfileButtton(
+                  onPressed: () {},
+                  text: "Change Profile Image",
                 ),
-                Container(
-                  width: w,
-                  margin: const EdgeInsets.only(left: 20, right: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      TextField(
-                        decoration: InputDecoration(
-                          hintText: "Name",
-                          prefixIcon: const Icon(Icons.people),
-                          filled: true,
-                          fillColor: Colors.white,
-                          enabledBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TextField(
-                        decoration: InputDecoration(
-                          hintText: "Prefered Job",
-                          prefixIcon: const Icon(Icons.work),
-                          filled: true,
-                          fillColor: Colors.white,
-                          enabledBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TextField(
-                        decoration: InputDecoration(
-                          hintText: "Mobile Number",
-                          prefixIcon: const Icon(Icons.phone),
-                          filled: true,
-                          fillColor: Colors.white,
-                          enabledBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TextField(
-                        decoration: InputDecoration(
-                          hintText: "Email id",
-                          prefixIcon: const Icon(Icons.mail),
-                          filled: true,
-                          fillColor: Colors.white,
-                          enabledBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                    ],
+                SizedBox(height: 20),
+                TextFormField(
+                  initialValue: _name,
+                  decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    labelText: 'Name',
                   ),
+                  onChanged: (value) {
+                    setState(() {
+                      _name = value;
+                    });
+                  },
                 ),
-                const SizedBox(
-                  height: 50,
-                ),
-                Container(
-                  width: 200,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    image: const DecorationImage(
-                        image: AssetImage("images/buttonbg.png"),
-                        fit: BoxFit.cover),
+                SizedBox(height: 20),
+                TextFormField(
+                  initialValue: _job,
+                  decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    labelText: 'Job',
                   ),
-                  child: Center(
-                    child: RichText(
-                        text: const TextSpan(
-                      text: "Submit",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    )),
-                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      _job = value;
+                    });
+                  },
                 ),
-              ]),
+                SizedBox(height: 20),
+                TextFormField(
+                  initialValue: _email,
+                  decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    labelText: 'Email',
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      _email = value;
+                    });
+                  },
+                ),
+                SizedBox(height: 20),
+                TextFormField(
+                  initialValue: _phone,
+                  decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    labelText: 'Phone',
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      _phone = value;
+                    });
+                  },
+                ),
+                SizedBox(height: 20),
+                TextFormField(
+                  initialValue: _address,
+                  decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    labelText: 'Address',
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      _address = value;
+                    });
+                  },
+                ),
+                SizedBox(height: 20),
+                MaterialButton(
+                    color: Colors.white,
+                    onPressed: () {},
+                    child: CustomProfileButtton(
+                        onPressed: () {}, text: "Save Changes"))
+              ],
             ),
           ),
         ),

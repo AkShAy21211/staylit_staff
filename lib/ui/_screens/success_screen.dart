@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:staylit/ui/_screens/booking_screen.dart';
+import 'package:staylit/widgets/custom_button.dart';
+import 'package:staylit/widgets/custom_profile_button.dart';
 
 class SuccessScreen extends StatelessWidget {
   const SuccessScreen({super.key});
@@ -28,20 +30,23 @@ class SuccessScreen extends StatelessWidget {
               ),
             ),
             const Text(
-              "Service Confirmed",
-              style: TextStyle(fontSize: 20, color: Colors.white),
+              "You Have Been Assigned For This Job",
+              style: TextStyle(fontSize: 15, color: Colors.white),
             ),
             SizedBox(
-                width: 180,
+                width: 150,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 100),
-                  child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => const BookingScreen()));
-                      },
-                      child: const Text("Go To Bookings")),
-                ))
+                    padding: const EdgeInsets.only(top: 100),
+                    child: MaterialButton(
+                      onPressed: () {},
+                      child: CustomButtton(
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => BookingScreen()));
+                          },
+                          text: "Go To Bookings"),
+                    )))
           ],
         ),
       ),
