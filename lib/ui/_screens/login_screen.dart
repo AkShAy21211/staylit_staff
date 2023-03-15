@@ -3,12 +3,63 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:staylit/ui/_screens/forgetpassword_scren.dart';
 import 'package:staylit/ui/_screens/home_screen/home_screen.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'signup_screen.dart';
+import 'package:flutter/services.dart';
+import 'package:email_validator/email_validator.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  late var _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  bool _obscureText = true;
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
+  void _submit() {
+    if (_formKey.currentState!.validate()) {
+      // Perform login actions
+      print('email: $_emailController');
+      print('pasword: $_passwordController');
+      _formKey.currentState!.save();
+
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => HomeScreen()));
+    }
+  }
+
+  String? _validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Email is required';
+    }
+    if (!EmailValidator.validate(value)) {
+      return 'Invalid email address';
+    }
+    return null;
+  }
+
+  String? _validatePassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Password is required';
+    }
+    if (value.length < 6) {
+      return 'Password must be at least 6 characters';
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
@@ -56,56 +107,72 @@ class LoginScreen extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-                        TextField(
-                          decoration: InputDecoration(
-                            hintText: "Email id",
-                            prefixIcon: const Icon(Icons.email),
-                            filled: true,
-                            fillColor: Colors.white,
-                            enabledBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        TextField(
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            hintText: "Password",
-                            prefixIcon: const Icon(Icons.lock),
-                            suffixIcon: Icon(Icons.visibility),
-                            filled: true,
-                            fillColor: Colors.white,
-                            enabledBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Row(children: [
-                          Container(
-                            margin: const EdgeInsets.only(left: 0, right: 0),
-                            child: RichText(
-                              text: TextSpan(
-                                text: "  Forget Password",
-                                style: const TextStyle(fontSize: 16),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap =
-                                      () => Get.to(() => const ForgetScreen()),
+                        Form(
+                            key: _formKey,
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  TextFormField(
+                                    decoration: InputDecoration(
+                                      fillColor: Colors.white,
+                                      filled: true,
+                                      labelText: 'Email',
+                                      prefixIcon: Icon(Icons.email),
+                                    ),
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'Please enter your email';
+                                      }
+                                      if (!value.contains('@')) {
+                                        return 'Please enter a valid email address';
+                                      }
+                                      return null;
+                                    },
+                                    onSaved: (value) {
+                                      _emailController =
+                                          value! as TextEditingController;
+                                    },
+                                  ),
+                                  SizedBox(height: 16.0),
+                                  TextFormField(
+                                    decoration: InputDecoration(
+                                      fillColor: Colors.white,
+                                      filled: true,
+                                      enabledBorder: OutlineInputBorder(),
+                                      labelText: 'Password',
+                                      prefixIcon: Icon(Icons.lock),
+                                      suffixIcon: IconButton(
+                                        icon: Icon(
+                                          _obscureText
+                                              ? Icons.visibility
+                                              : Icons.visibility_off,
+                                        ),
+                                        onPressed: _togglePasswordVisibility,
+                                      ),
+                                    ),
+                                    obscureText: _obscureText,
+                                    validator: _validatePassword,
+                                  ),
+                                ],
                               ),
-                            ),
-                          )
-                        ])
+                            )),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Container(
+                                child: RichText(
+                                  text: TextSpan(
+                                    text: "  Forget Password",
+                                    style: const TextStyle(fontSize: 16),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () =>
+                                          Get.to(() => const ForgetScreen()),
+                                  ),
+                                ),
+                              )
+                            ])
                       ],
                     ),
                   ),
@@ -118,8 +185,7 @@ class LoginScreen extends StatelessWidget {
                     height: 40,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const HomeScreen()));
+                        _submit();
                       },
                       style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(

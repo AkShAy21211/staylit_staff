@@ -40,7 +40,9 @@ dependencies:
   get: 
   easy_splash_screen:
   material_design_icons_flutter: ^6.0.7096
-  supabase_flutter: ^1.4.2
+  supabase_flutter: ^1.5.0
+  email_validator: ^2.1.17
+  flutter_bloc: ^8.1.2
 
   
   

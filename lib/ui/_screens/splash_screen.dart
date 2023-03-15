@@ -21,7 +21,7 @@ class _SplashPageState extends State<SplashPage> {
       ),
       backgroundColor: const Color.fromARGB(255, 15, 31, 45),
       showLoader: true,
-      logoWidth: 150,
+      logoWidth: 100,
       loaderColor: Colors.white,
       loadingText: const Text(
         "Loading...",
