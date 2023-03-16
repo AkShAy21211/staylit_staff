@@ -11,6 +11,7 @@ void main(List<String> args) async {
   );
   runApp(const MyApp());
 }
+
 //initiltzing supabase
 final supabase = Supabase.instance.client;
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SplashPage(),
     );

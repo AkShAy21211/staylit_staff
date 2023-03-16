@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:staylit/ui/_screens/forgetpassword_scren.dart';
 import 'package:staylit/ui/_screens/home_screen/home_screen.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+
 import 'signup_screen.dart';
-import 'package:flutter/services.dart';
 import 'package:email_validator/email_validator.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -17,7 +16,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late var _emailController = TextEditingController();
+  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   bool _obscureText = true;
@@ -31,21 +30,31 @@ class _LoginScreenState extends State<LoginScreen> {
   void _submit() {
     if (_formKey.currentState!.validate()) {
       // Perform login actions
-      print('email: $_emailController');
-      print('pasword: $_passwordController');
-      _formKey.currentState!.save();
 
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomeScreen()));
+      _formKey.currentState!.save();
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => HomeScreen()));
     }
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Email is required';
+      return 'Please enter a  email address';
     }
     if (!EmailValidator.validate(value)) {
       return 'Invalid email address';
+    }
+
+    final emailRegex = RegExp(r'^\S+@\S+\.\S+$');
+    if (!emailRegex.hasMatch(value)) {
+      return 'Please enter a valid email address';
     }
     return null;
   }
@@ -56,6 +65,9 @@ class _LoginScreenState extends State<LoginScreen> {
     }
     if (value.length < 6) {
       return 'Password must be at least 6 characters';
+    }
+    if (value.contains(" ")) {
+      return 'White spaces are not allowed';
     }
     return null;
   }
@@ -115,26 +127,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   TextFormField(
-                                    decoration: InputDecoration(
-                                      fillColor: Colors.white,
-                                      filled: true,
-                                      labelText: 'Email',
-                                      prefixIcon: Icon(Icons.email),
-                                    ),
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return 'Please enter your email';
-                                      }
-                                      if (!value.contains('@')) {
-                                        return 'Please enter a valid email address';
-                                      }
-                                      return null;
-                                    },
-                                    onSaved: (value) {
-                                      _emailController =
-                                          value! as TextEditingController;
-                                    },
-                                  ),
+                                      decoration: InputDecoration(
+                                        fillColor: Colors.white,
+                                        filled: true,
+                                        labelText: 'Email',
+                                        prefixIcon: Icon(Icons.email),
+                                      ),
+                                      validator: _validateEmail),
                                   SizedBox(height: 16.0),
                                   TextFormField(
                                     decoration: InputDecoration(
