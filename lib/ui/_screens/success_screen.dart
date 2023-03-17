@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:staylit/ui/_screens/booking_screen.dart';
 import 'package:staylit/widgets/custom_button.dart';
-import 'package:staylit/widgets/custom_profile_button.dart';
+
 
 class SuccessScreen extends StatelessWidget {
   const SuccessScreen({super.key});
@@ -43,7 +42,7 @@ class SuccessScreen extends StatelessWidget {
                           onPressed: () {
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
-                                    builder: (context) => BookingScreen()));
+                                    builder: (context) => const BookingScreen()));
                           },
                           text: "Go To Bookings"),
                     )))

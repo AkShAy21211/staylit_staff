@@ -4,13 +4,13 @@ import 'package:staylit/ui/_screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
-  SplashPage({Key? key}) : super(key: key);
+  const SplashPage({Key? key}) : super(key: key);
 
   @override
-  _SplashPageState createState() => _SplashPageState();
+  SplashPageState createState() => SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
+class SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return EasySplashScreen(

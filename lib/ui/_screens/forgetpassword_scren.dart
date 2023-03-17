@@ -85,7 +85,7 @@ class ForgetScreen extends StatelessWidget {
                     TextButton(
                       onPressed: () => Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
-                              builder: (context) => LoginScreen())),
+                              builder: (context) => const LoginScreen())),
                       child: const Text('OK'),
                     ),
                   ],

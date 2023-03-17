@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class AboutUsScreen extends StatelessWidget {
   const AboutUsScreen({super.key});
@@ -8,23 +6,23 @@ class AboutUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 15, 31, 45),
+        backgroundColor: const Color.fromARGB(255, 15, 31, 45),
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 15, 31, 45),
+          backgroundColor: const Color.fromARGB(255, 15, 31, 45),
           leading: IconButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
           ),
-          title: Text("About Us"),
+          title: const Text("About Us"),
         ),
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: const [
                 SizedBox(
                   height: 40,
                 ),

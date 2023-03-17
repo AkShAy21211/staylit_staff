@@ -1,15 +1,11 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:staylit/ui/_screens/about_us_screen.dart';
-import 'package:staylit/ui/_screens/booking_screen.dart';
-import 'package:staylit/ui/_screens/drawer_screen.dart';
+
 import 'package:staylit/ui/_screens/login_screen.dart';
-import 'package:staylit/ui/_screens/pastrequest_screen.dart';
+
 import 'package:staylit/ui/_screens/profile_screen.dart';
-import 'package:staylit/ui/_screens/request_screen.dart';
-import 'package:staylit/ui/_screens/setting_screen.dart';
-import 'package:staylit/ui/_screens/wating_list_screen.dart';
+
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
@@ -18,12 +14,12 @@ class SettingScreen extends StatelessWidget {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: Text("Settings"),
+          title: const Text("Settings"),
           leading: IconButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
           ),
           backgroundColor: const Color.fromARGB(255, 15, 31, 45),
         ),
@@ -69,7 +65,7 @@ class SettingScreen extends StatelessWidget {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  ProfileScreen()));
+                                                  const ProfileScreen()));
                                     },
                                     text: "Edit Profile")
                               ],
@@ -101,7 +97,7 @@ class SettingScreen extends StatelessWidget {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  LoginScreen()));
+                                                  const LoginScreen()));
                                     },
                                     text: "LogOut")
                               ],

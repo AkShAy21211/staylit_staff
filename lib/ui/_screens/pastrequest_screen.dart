@@ -1,18 +1,10 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:staylit/ui/_screens/drawer_screen.dart';
-import 'package:staylit/ui/_screens/success_screen.dart';
-
-import '../../widgets/custom_button.dart';
 
 class PastRequestScreen extends StatelessWidget {
   const PastRequestScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 15, 31, 45),
         appBar: AppBar(
@@ -20,8 +12,8 @@ class PastRequestScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              icon: Icon(Icons.arrow_back)),
-          title: Text("Past Job Requests"),
+              icon: const Icon(Icons.arrow_back)),
+          title: const Text("Past Job Requests"),
           backgroundColor: const Color.fromARGB(255, 15, 31, 45),
         ),
         body: SingleChildScrollView(
@@ -36,7 +28,7 @@ class PastRequestScreen extends StatelessWidget {
                   const SizedBox(height: 30),
                   Material(
                     elevation: 1,
-                    color: Color.fromARGB(255, 23, 46, 66),
+                    color: const Color.fromARGB(255, 23, 46, 66),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30)),
                     child: Column(
@@ -71,18 +63,19 @@ class PastRequestScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Table(
-                                      defaultColumnWidth: FixedColumnWidth(150),
+                                      defaultColumnWidth:
+                                          const FixedColumnWidth(150),
                                       border: TableBorder.all(
                                           color: Colors.transparent, width: 1),
                                       children: [
                                         TableRow(children: [
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('Service Request :',
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                 ))
                                           ]),
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('Cleaning',
                                                 style: TextStyle(
                                                   color: Colors.white,
@@ -90,13 +83,13 @@ class PastRequestScreen extends StatelessWidget {
                                           ]),
                                         ]),
                                         TableRow(children: [
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('Date :',
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                 ))
                                           ]),
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('10/02/2023',
                                                 style: TextStyle(
                                                   color: Colors.white,
@@ -104,13 +97,13 @@ class PastRequestScreen extends StatelessWidget {
                                           ]),
                                         ]),
                                         TableRow(children: [
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('Time :',
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                 ))
                                           ]),
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('10:00AM',
                                                 style: TextStyle(
                                                   color: Colors.white,
@@ -118,13 +111,13 @@ class PastRequestScreen extends StatelessWidget {
                                           ]),
                                         ]),
                                         TableRow(children: [
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('Room Number :',
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                 ))
                                           ]),
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('10',
                                                 style: TextStyle(
                                                   color: Colors.white,
@@ -135,7 +128,7 @@ class PastRequestScreen extends StatelessWidget {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(),
-                                      child: Container(
+                                      child: SizedBox(
                                         height: 50,
                                         width: 50,
                                         child:
@@ -148,18 +141,18 @@ class PastRequestScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   Material(
                     elevation: 1,
-                    color: Color.fromARGB(255, 23, 46, 66),
+                    color: const Color.fromARGB(255, 23, 46, 66),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30)),
                     child: Column(
@@ -194,18 +187,19 @@ class PastRequestScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Table(
-                                      defaultColumnWidth: FixedColumnWidth(150),
+                                      defaultColumnWidth:
+                                          const FixedColumnWidth(150),
                                       border: TableBorder.all(
                                           color: Colors.transparent, width: 1),
                                       children: [
                                         TableRow(children: [
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('Service Request :',
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                 ))
                                           ]),
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('Cleaning',
                                                 style: TextStyle(
                                                   color: Colors.white,
@@ -213,13 +207,13 @@ class PastRequestScreen extends StatelessWidget {
                                           ]),
                                         ]),
                                         TableRow(children: [
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('Date :',
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                 ))
                                           ]),
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('10/02/2023',
                                                 style: TextStyle(
                                                   color: Colors.white,
@@ -227,13 +221,13 @@ class PastRequestScreen extends StatelessWidget {
                                           ]),
                                         ]),
                                         TableRow(children: [
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('Time :',
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                 ))
                                           ]),
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('10:00AM',
                                                 style: TextStyle(
                                                   color: Colors.white,
@@ -241,13 +235,13 @@ class PastRequestScreen extends StatelessWidget {
                                           ]),
                                         ]),
                                         TableRow(children: [
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('Room Number :',
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                 ))
                                           ]),
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('10',
                                                 style: TextStyle(
                                                   color: Colors.white,
@@ -258,7 +252,7 @@ class PastRequestScreen extends StatelessWidget {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(),
-                                      child: Container(
+                                      child: SizedBox(
                                         height: 50,
                                         width: 50,
                                         child:
@@ -271,18 +265,18 @@ class PastRequestScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   Material(
                     elevation: 1,
-                    color: Color.fromARGB(255, 23, 46, 66),
+                    color: const Color.fromARGB(255, 23, 46, 66),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30)),
                     child: Column(
@@ -317,18 +311,19 @@ class PastRequestScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Table(
-                                      defaultColumnWidth: FixedColumnWidth(150),
+                                      defaultColumnWidth:
+                                          const FixedColumnWidth(150),
                                       border: TableBorder.all(
                                           color: Colors.transparent, width: 1),
                                       children: [
                                         TableRow(children: [
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('Service Request :',
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                 ))
                                           ]),
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('Cleaning',
                                                 style: TextStyle(
                                                   color: Colors.white,
@@ -336,13 +331,13 @@ class PastRequestScreen extends StatelessWidget {
                                           ]),
                                         ]),
                                         TableRow(children: [
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('Date :',
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                 ))
                                           ]),
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('10/02/2023',
                                                 style: TextStyle(
                                                   color: Colors.white,
@@ -350,13 +345,13 @@ class PastRequestScreen extends StatelessWidget {
                                           ]),
                                         ]),
                                         TableRow(children: [
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('Time :',
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                 ))
                                           ]),
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('10:00AM',
                                                 style: TextStyle(
                                                   color: Colors.white,
@@ -364,13 +359,13 @@ class PastRequestScreen extends StatelessWidget {
                                           ]),
                                         ]),
                                         TableRow(children: [
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('Room Number :',
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                 ))
                                           ]),
-                                          Column(children: [
+                                          Column(children: const [
                                             Text('10',
                                                 style: TextStyle(
                                                   color: Colors.white,
@@ -381,7 +376,7 @@ class PastRequestScreen extends StatelessWidget {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(),
-                                      child: Container(
+                                      child: SizedBox(
                                         height: 50,
                                         width: 50,
                                         child:
@@ -394,7 +389,7 @@ class PastRequestScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                       ],

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:staylit/ui/_screens/about_us_screen.dart';
+
 import 'package:staylit/ui/_screens/home_screen/home_screen.dart';
-import 'package:staylit/ui/_screens/login_screen.dart';
-import 'package:staylit/ui/_screens/profile_screen.dart';
+
 import 'package:staylit/ui/_screens/setting_screen.dart';
 
 class DrawwerScreen extends StatelessWidget {
@@ -11,7 +10,7 @@ class DrawwerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Color.fromARGB(99, 0, 0, 0),
+      backgroundColor: const Color.fromARGB(99, 0, 0, 0),
       child: Column(
         children: <Widget>[
           Container(
@@ -21,7 +20,7 @@ class DrawwerScreen extends StatelessWidget {
             ),
             width: double.infinity,
             padding: const EdgeInsets.all(20),
-            color: Color.fromARGB(99, 0, 0, 0),
+            color: const Color.fromARGB(99, 0, 0, 0),
             child: Center(
               child: Column(
                 children: <Widget>[
@@ -62,7 +61,7 @@ class DrawwerScreen extends StatelessWidget {
             title: InkWell(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomeScreen()));
+                    MaterialPageRoute(builder: (context) => const HomeScreen()));
               },
               child: const Text(
                 "Home",
@@ -82,7 +81,7 @@ class DrawwerScreen extends StatelessWidget {
             title: InkWell(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SettingScreen()));
+                    MaterialPageRoute(builder: (context) => const SettingScreen()));
               },
               child: const Text(
                 "Settings",

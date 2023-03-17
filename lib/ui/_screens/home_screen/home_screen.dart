@@ -1,4 +1,4 @@
-import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:staylit/ui/_screens/booking_screen.dart';
@@ -92,7 +92,7 @@ class HomeScreen extends StatelessWidget {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  WatingListScreen()));
+                                                  const WatingListScreen()));
                                     },
                                     text: "Wating List")
                               ],

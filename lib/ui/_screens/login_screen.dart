@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       _formKey.currentState!.save();
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => HomeScreen()));
+          .push(MaterialPageRoute(builder: (context) => const HomeScreen()));
     }
   }
 
@@ -127,21 +127,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   TextFormField(
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         fillColor: Colors.white,
                                         filled: true,
                                         labelText: 'Email',
                                         prefixIcon: Icon(Icons.email),
                                       ),
                                       validator: _validateEmail),
-                                  SizedBox(height: 16.0),
+                                  const SizedBox(height: 16.0),
                                   TextFormField(
                                     decoration: InputDecoration(
                                       fillColor: Colors.white,
                                       filled: true,
-                                      enabledBorder: OutlineInputBorder(),
+                                      enabledBorder: const OutlineInputBorder(),
                                       labelText: 'Password',
-                                      prefixIcon: Icon(Icons.lock),
+                                      prefixIcon: const Icon(Icons.lock),
                                       suffixIcon: IconButton(
                                         icon: Icon(
                                           _obscureText
@@ -160,17 +160,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Container(
-                                child: RichText(
-                                  text: TextSpan(
-                                    text: "  Forget Password",
-                                    style: const TextStyle(fontSize: 16),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () =>
-                                          Get.to(() => const ForgetScreen()),
-                                  ),
+                              RichText(
+                                text: TextSpan(
+                                  text: "  Forget Password",
+                                  style: const TextStyle(fontSize: 16),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () =>
+                                        Get.to(() => const ForgetScreen()),
                                 ),
-                              )
+                              ),
                             ])
                       ],
                     ),

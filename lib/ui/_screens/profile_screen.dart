@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:staylit/widgets/custom_button.dart';
 import 'package:staylit/widgets/custom_profile_button.dart';
 
 class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key});
+
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  ProfileScreenState createState() => ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class ProfileScreenState extends State<ProfileScreen> {
   String _name = "John Doe";
   String _job = "Cleaning";
   String _email = "johndoe@example.com";
@@ -23,10 +24,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
         ),
         backgroundColor: const Color.fromARGB(255, 15, 31, 45),
-        title: Text('Edit Profile'),
+        title: const Text('Edit Profile'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -34,21 +35,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              SizedBox(height: 20),
-              CircleAvatar(
+              const SizedBox(height: 20),
+              const CircleAvatar(
                 radius: 50,
                 backgroundImage: NetworkImage(
                     'https://www.w3schools.com/w3images/avatar2.png'),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               CustomProfileButtton(
                 onPressed: () {},
                 text: "Change Profile Image",
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                 initialValue: _name,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
                   labelText: 'Name',
@@ -59,10 +60,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   });
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                 initialValue: _job,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
                   labelText: 'Job',
@@ -73,10 +74,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   });
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                 initialValue: _email,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
                   labelText: 'Email',
@@ -87,10 +88,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   });
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                 initialValue: _phone,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
                   labelText: 'Phone',
@@ -101,10 +102,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   });
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                 initialValue: _address,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
                   labelText: 'Address',
@@ -115,7 +116,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   });
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               MaterialButton(
                   color: Colors.white,
                   onPressed: () {},
