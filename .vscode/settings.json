@@ -1,5 +1,6 @@
 {
     "yaml.schemas": {
         "https://json.schemastore.org/pubspec.json": "file:///c%3A/Users/ASUS/Desktop/staylit/staylit_staff/pubspec.yaml"
-    }
+    },
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

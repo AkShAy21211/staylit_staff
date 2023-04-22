@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:staylit/ui/_screens/splash_screen.dart';
+import 'package:staylit/ui/screens/home_screen.dart';
+import 'package:staylit/ui/screens/login_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main(List<String> args) async {
@@ -11,18 +12,31 @@ void main(List<String> args) async {
   runApp(const MyApp());
 }
 
-//initiltzing supabase
-final supabase = Supabase.instance.client;
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashPage(),
+      theme: ThemeData.light().copyWith(
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: Colors.blue[50],
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 15,
+          ),
+          iconColor: Colors.blueAccent,
+          prefixIconColor: Colors.blueAccent,
+          suffixIconColor: Colors.blueAccent,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide.none,
+          ),
+        ),
+      ),
+      home: const HomeScreen(),
     );
   }
 }
