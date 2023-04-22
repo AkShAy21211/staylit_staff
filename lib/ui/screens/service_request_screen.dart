@@ -111,35 +111,47 @@ class ServiceRequestCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  '#11',
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        color: Colors.grey[600],
-                        fontWeight: FontWeight.w400,
-                      ),
+                Expanded(
+                  child: Text(
+                    '12/12/2022 10:00 am',
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: Colors.grey[600],
+                          fontWeight: FontWeight.w400,
+                        ),
+                  ),
                 ),
-                Text(
-                  'Pending',
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        color: Colors.grey[600],
-                        fontWeight: FontWeight.w400,
-                      ),
+                Expanded(
+                  child: Text(
+                    'Pending',
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: Colors.grey[600],
+                          fontWeight: FontWeight.w400,
+                        ),
+                    textAlign: TextAlign.end,
+                  ),
                 ),
               ],
             ),
             const SizedBox(
               height: 10,
             ),
-            const LabelWithText(
-              label: 'Service',
-              text: 'Cleaning',
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            const LabelWithText(
-              label: 'From',
-              text: 'User name',
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                Expanded(
+                  child: LabelWithText(
+                    label: 'Service',
+                    text: 'Cleaning',
+                  ),
+                ),
+                Expanded(
+                  child: LabelWithText(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    label: 'From',
+                    text: 'User name',
+                  ),
+                ),
+              ],
             ),
             const Divider(
               height: 30,
