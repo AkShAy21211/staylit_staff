@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:staylit/blocs/auth/sign_in/sign_in_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:staylit/ui/screens/home_screen.dart';
@@ -106,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         validator: passwordValidator,
                         obscureText: true,
                         decoration: InputDecoration(
-                          hintText: "Enter Password",
+                          hintText: "Password",
                           prefixIcon: const Icon(
                             Icons.lock,
                             size: 20,
@@ -177,10 +178,12 @@ class Branding extends StatelessWidget {
         ),
         Text(
           'STAYLIT',
-          style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                color: Colors.blue,
-                fontWeight: FontWeight.bold,
-              ),
+          style: GoogleFonts.josefinSans(
+            textStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
+                  color: Colors.blue,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
         ),
       ],
     );
