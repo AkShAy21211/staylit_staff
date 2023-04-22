@@ -92,7 +92,7 @@ class CustomBottomNavBar extends StatelessWidget {
         ),
         NavBarButton(
           label: 'Notifications',
-          iconData: Icons.notifications_active_outlined,
+          iconData: Icons.notifications_none_outlined,
           selectedIconData: Icons.notifications_active,
           onPressed: () {
             onChanged(1);
