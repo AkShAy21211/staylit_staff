@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:staylit/ui/screens/notification_screen.dart';
 import 'package:staylit/ui/screens/service_request_screen.dart';
 import 'package:staylit/ui/screens/settings_screen.dart';
@@ -30,10 +31,12 @@ class _HomeScreenState extends State<HomeScreen>
         centerTitle: true,
         title: Text(
           'STAYLIT',
-          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                color: Colors.blueAccent[700],
-                fontWeight: FontWeight.bold,
-              ),
+          style: GoogleFonts.josefinSans(
+            textStyle: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                  color: Colors.blueAccent[700],
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
         ),
         elevation: 1,
       ),
