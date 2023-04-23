@@ -35,6 +35,7 @@ class CustomButton extends StatelessWidget {
                     width: 20,
                     child: CircularProgressIndicator(
                       strokeWidth: 1.5,
+                      color: Colors.white,
                     ),
                   )
                 : Text(

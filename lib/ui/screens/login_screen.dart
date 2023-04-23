@@ -24,15 +24,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
-    // Future.delayed(const Duration(milliseconds: 100), () {
-    //   if (Supabase.instance.client.auth.currentUser != null) {
-    //     Navigator.of(context).push(
-    //       MaterialPageRoute(
-    //         builder: (context) => const HomeScreen(),
-    //       ),
-    //     );
-    //   }
-    // });
+    Future.delayed(const Duration(milliseconds: 100), () {
+      if (Supabase.instance.client.auth.currentUser != null) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const HomeScreen(),
+          ),
+        );
+      }
+    });
     super.initState();
   }
 
@@ -105,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       TextFormField(
                         controller: _passwordController,
                         validator: passwordValidator,
-                        obscureText: true,
+                        obscureText: isObscure,
                         decoration: InputDecoration(
                           hintText: "Password",
                           prefixIcon: const Icon(
