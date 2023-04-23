@@ -233,7 +233,7 @@ class ServiceRequestCard extends StatelessWidget {
                   child: LabelWithText(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     label: 'Price',
-                    text: '₹${serviceDetails['price'].toString()}',
+                    text: '₹${serviceDetails['service']['price'].toString()}',
                   ),
                 ),
               ],
@@ -250,33 +250,48 @@ class ServiceRequestCard extends StatelessWidget {
             ),
             serviceDetails['status'] == 'completed'
                 ? const SizedBox()
-                : CustomActionButton(
-                    iconData: serviceDetails['status'] == 'pending'
-                        ? Icons.check_circle_outline
-                        : serviceDetails['payment_status'] == 'accepted'
-                            ? Icons.done_all_outlined
-                            : Icons.error_outline,
-                    label: serviceDetails['status'] == 'pending'
-                        ? 'Accept'
-                        : serviceDetails['status'] == 'accepted'
-                            ? 'Completed'
-                            : 'Oops',
-                    color: serviceDetails['status'] == 'pending'
-                        ? Colors.green
-                        : serviceDetails['status'] == 'accepted'
-                            ? Colors.blue[800]!
-                            : Colors.grey,
-                    onPressed: () {
-                      serviceRequestBloc.add(ChangeServiceRequestStatusEvent(
-                        requestId: serviceDetails['id'],
-                        status: serviceDetails['status'] == 'pending'
-                            ? 'accepted'
-                            : serviceDetails['status'] == 'accepted'
-                                ? 'completed'
-                                : '',
-                      ));
-                    },
-                  ),
+                : serviceDetails['status'] == 'pending'
+                    ? CustomActionButton(
+                        iconData: Icons.check_circle_outline,
+                        label: 'Accept',
+                        color: Colors.green,
+                        onPressed: () {
+                          serviceRequestBloc.add(
+                              ChangeServiceRequestStatusEvent(
+                                  requestId: serviceDetails['id'],
+                                  status: 'accepted'));
+                        },
+                      )
+                    : serviceDetails['status'] == 'accepted'
+                        ? CustomActionButton(
+                            iconData: serviceDetails['status'] == 'accepted' &&
+                                    serviceDetails['payment_status'] ==
+                                        'pending'
+                                ? Icons.stop_circle
+                                : Icons.done_all_outlined,
+                            label: serviceDetails['status'] == 'accepted' &&
+                                    serviceDetails['payment_status'] ==
+                                        'pending'
+                                ? 'Payment Pending'
+                                : 'Completed',
+                            color: serviceDetails['status'] == 'accepted' &&
+                                    serviceDetails['payment_status'] ==
+                                        'pending'
+                                ? Colors.grey
+                                : Colors.blue[800]!,
+                            onPressed: serviceDetails['status'] == 'accepted' &&
+                                    serviceDetails['payment_status'] ==
+                                        'pending'
+                                ? () {}
+                                : () {
+                                    serviceRequestBloc
+                                        .add(ChangeServiceRequestStatusEvent(
+                                      requestId: serviceDetails['id'],
+                                      status: 'completed',
+                                    ));
+                                  },
+                          )
+                        : const SizedBox(),
           ],
         ),
       ),

@@ -23,15 +23,31 @@ class ServiceRequestBloc
         if (event is GetAllServiceRequestsEvent) {
           List<dynamic> temp = [];
 
-          if (event.serviceId != null) {
+          if (event.serviceId != null && event.status.isNotEmpty) {
             temp = await queryTable
                 .select('*')
+                .eq('user_id', supabaseClient.auth.currentUser!.id)
                 .eq('service_id', event.serviceId)
+                .ilike('status', '%${event.status}%')
                 .order('created_at', ascending: true);
           } else if (event.status.isNotEmpty) {
+            if (event.status == 'accepted' || event.status == 'completed') {
+              temp = await queryTable
+                  .select('*')
+                  .eq('accepted_by', supabaseClient.auth.currentUser!.id)
+                  .ilike('status', '%${event.status}%')
+                  .order('created_at', ascending: true);
+            } else {
+              temp = await queryTable
+                  .select('*')
+                  .ilike('status', '%${event.status}%')
+                  .order('created_at', ascending: true);
+            }
+          } else if (event.serviceId != null) {
             temp = await queryTable
                 .select('*')
-                .ilike('status', '%${event.status}%')
+                .eq('user_id', supabaseClient.auth.currentUser!.id)
+                .eq('service_id', event.serviceId)
                 .order('created_at', ascending: true);
           }
 
@@ -56,12 +72,13 @@ class ServiceRequestBloc
                 .eq('occuppied_by', serviceRequests[i]['user_id'])
                 .single();
             serviceRequests[i]['room'] = room;
-
-            Map<String, dynamic> acceptedBy = await staffTable
-                .select()
-                .eq('user_id', serviceRequests[i]['accepted_by'])
-                .single();
-            serviceRequests[i]['acceptedBy'] = acceptedBy;
+            // if (serviceRequests[i]['accepted_by'] != null) {
+            //   Map<String, dynamic> acceptedBy = await staffTable
+            //       .select()
+            //       .eq('user_id', serviceRequests[i]['accepted_by'])
+            //       .single();
+            //   serviceRequests[i]['acceptedBy'] = acceptedBy;
+            // }
           }
 
           Logger().i(serviceRequests);
@@ -85,6 +102,8 @@ class ServiceRequestBloc
               },
             );
           }
+
+          add(GetAllServiceRequestsEvent());
         } else if (event is DeleteServiceRequestEvent) {
           await queryTable
               .delete()
@@ -93,6 +112,7 @@ class ServiceRequestBloc
                 event.serviceRequestId,
               )
               .eq('user_id', supabaseClient.auth.currentUser!.id);
+          add(GetAllServiceRequestsEvent());
         } else if (event is ChangeServiceRequestStatusEvent) {
           if (event.status == 'accepted') {
             await queryTable.update(
@@ -101,6 +121,7 @@ class ServiceRequestBloc
                 'status': 'accepted',
               },
             ).eq('id', event.requestId);
+            add(GetAllServiceRequestsEvent());
           } else if (event.status == 'completed') {
             await queryTable
                 .update(
@@ -111,6 +132,7 @@ class ServiceRequestBloc
                 .eq('id', event.requestId)
                 .eq('accepted_by', supabaseClient.auth.currentUser!.id);
           }
+          add(GetAllServiceRequestsEvent());
         }
       } catch (e, s) {
         Logger().wtf('$e, $s');
