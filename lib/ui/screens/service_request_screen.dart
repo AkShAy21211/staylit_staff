@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:staylit/blocs/service_request/service_request_bloc.dart';
+import 'package:staylit/ui/widgets/complaints/add_complaint_dialog.dart';
 import 'package:staylit/ui/widgets/custom_action_button.dart';
 import 'package:staylit/ui/widgets/custom_alert_dialog.dart';
 import 'package:staylit/ui/widgets/custom_card.dart';
@@ -279,6 +280,32 @@ class ServiceRequestCard extends StatelessWidget {
                         },
                       )
                     : const SizedBox(),
+            const SizedBox(
+              height: 10,
+            ),
+            CustomActionButton(
+              color: Colors.red,
+              iconData: Icons.report_gmailerrorred,
+              onPressed: () async {
+                await showDialog(
+                  context: context,
+                  builder: (_) => AddComplaintDialog(
+                    serviceRequestId: serviceDetails['id'],
+                  ),
+                );
+
+                showDialog(
+                  context: context,
+                  builder: (_) => const CustomAlertDialog(
+                    title: 'Received',
+                    message:
+                        'Your complaint has been received to the admin of STAYLIT. Will fix your complaint as soon as possible',
+                    primaryButtonLabel: 'Ok',
+                  ),
+                );
+              },
+              label: 'Report Service',
+            ),
           ],
         ),
       ),

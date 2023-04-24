@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:staylit/blocs/complaint/complaint_bloc.dart';
 import 'package:staylit/ui/widgets/custom_alert_dialog.dart';
 
 class AddComplaintDialog extends StatefulWidget {
+  final int serviceRequestId;
   const AddComplaintDialog({
     super.key,
+    required this.serviceRequestId,
   });
 
   @override
@@ -13,12 +14,14 @@ class AddComplaintDialog extends StatefulWidget {
 }
 
 class _AddComplaintDialogState extends State<AddComplaintDialog> {
+  bool isLoading = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _complaintController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return CustomAlertDialog(
+      isLoading: isLoading,
       title: 'Complaint',
       message: 'Send your complaint to STAYLIT',
       content: Form(
@@ -50,13 +53,17 @@ class _AddComplaintDialogState extends State<AddComplaintDialog> {
         ),
       ),
       primaryButtonLabel: 'Send',
-      primaryOnPressed: () {
+      primaryOnPressed: () async {
         if (_formKey.currentState!.validate()) {
-          BlocProvider.of<ComplaintBloc>(context).add(
+          isLoading = true;
+          setState(() {});
+          ComplaintBloc().add(
             AddComplaintEvent(
-              complaint: _complaintController.text.trim(),
-            ),
+                complaint: _complaintController.text.trim(),
+                serviceRequestId: widget.serviceRequestId),
           );
+          isLoading = true;
+          setState(() {});
           Navigator.pop(context);
         }
       },

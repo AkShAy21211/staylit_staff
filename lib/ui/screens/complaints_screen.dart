@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:staylit/blocs/complaint/complaint_bloc.dart';
-import 'package:staylit/ui/widgets/complaints/add_complaint_dialog.dart';
 import 'package:staylit/ui/widgets/complaints/complaints_card.dart';
 import 'package:staylit/ui/widgets/custom_alert_dialog.dart';
 import 'package:staylit/ui/widgets/custom_progress_indicator.dart';
@@ -41,27 +40,6 @@ class _ComplaintsScreenState extends State<ComplaintsScreen> {
           leading: BackButton(
             color: Colors.blueAccent[700]!,
           ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: IconButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => BlocProvider<ComplaintBloc>.value(
-                      value: complaintBloc,
-                      child: const AddComplaintDialog(),
-                    ),
-                  );
-                },
-                icon: Icon(
-                  Icons.add,
-                  color: Colors.blueAccent[700]!,
-                  size: 25,
-                ),
-              ),
-            ),
-          ],
         ),
         body: BlocConsumer<ComplaintBloc, ComplaintState>(
           listener: (context, state) {
@@ -96,7 +74,8 @@ class _ComplaintsScreenState extends State<ComplaintsScreen> {
                                     children: List<Widget>.generate(
                                       state.complaints.length,
                                       (index) => ComplaintCard(
-                                        details: state.complaints[index],
+                                        complaintDetails:
+                                            state.complaints[index],
                                       ),
                                     ),
                                   ),

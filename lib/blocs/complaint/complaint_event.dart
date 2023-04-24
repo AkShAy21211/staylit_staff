@@ -5,9 +5,11 @@ abstract class ComplaintEvent {}
 
 class AddComplaintEvent extends ComplaintEvent {
   final String complaint;
+  final int? serviceRequestId;
 
   AddComplaintEvent({
     required this.complaint,
+    this.serviceRequestId,
   });
 }
 
