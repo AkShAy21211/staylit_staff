@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:staylit/ui/widgets/custom_action_button.dart';
 import 'package:staylit/ui/widgets/custom_card.dart';
 
 class NotificationCard extends StatelessWidget {

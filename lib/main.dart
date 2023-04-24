@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:staylit/ui/screens/home_screen.dart';
 import 'package:staylit/ui/screens/login_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

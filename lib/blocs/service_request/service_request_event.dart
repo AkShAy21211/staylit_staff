@@ -23,9 +23,11 @@ class AddServiceRequestEvent extends ServiceRequestEvent {
 
 class DeleteServiceRequestEvent extends ServiceRequestEvent {
   final int serviceRequestId;
+  final int serviceId;
 
   DeleteServiceRequestEvent({
     required this.serviceRequestId,
+    required this.serviceId,
   });
 }
 

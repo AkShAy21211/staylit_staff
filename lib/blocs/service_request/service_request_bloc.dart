@@ -16,39 +16,26 @@ class ServiceRequestBloc
       SupabaseQueryBuilder queryTable = supabaseClient.from('service_requests');
       SupabaseQueryBuilder roomTable = supabaseClient.from('rooms');
       SupabaseQueryBuilder userTable = supabaseClient.from('profiles');
-      SupabaseQueryBuilder staffTable = supabaseClient.from('staffs');
+      // SupabaseQueryBuilder staffTable = supabaseClient.from('staffs');
       SupabaseQueryBuilder servicesTable = supabaseClient.from('services');
 
       try {
         if (event is GetAllServiceRequestsEvent) {
           List<dynamic> temp = [];
 
-          if (event.serviceId != null && event.status.isNotEmpty) {
+          if (event.status == 'pending') {
             temp = await queryTable
                 .select('*')
-                .eq('user_id', supabaseClient.auth.currentUser!.id)
-                .eq('service_id', event.serviceId)
-                .ilike('status', '%${event.status}%')
-                .order('created_at', ascending: true);
-          } else if (event.status.isNotEmpty) {
-            if (event.status == 'accepted' || event.status == 'completed') {
-              temp = await queryTable
-                  .select('*')
-                  .eq('accepted_by', supabaseClient.auth.currentUser!.id)
-                  .ilike('status', '%${event.status}%')
-                  .order('created_at', ascending: true);
-            } else {
-              temp = await queryTable
-                  .select('*')
-                  .ilike('status', '%${event.status}%')
-                  .order('created_at', ascending: true);
-            }
-          } else if (event.serviceId != null) {
+                .eq('status', event.status)
+                .order('created_at', ascending: false);
+          } else if (event.status == 'accepted' ||
+              event.status == 'completed') {
+            Logger().e(event.status);
             temp = await queryTable
                 .select('*')
-                .eq('user_id', supabaseClient.auth.currentUser!.id)
-                .eq('service_id', event.serviceId)
-                .order('created_at', ascending: true);
+                .eq('accepted_by', supabaseClient.auth.currentUser!.id)
+                .eq('status', event.status)
+                .order('created_at', ascending: false);
           }
 
           List<Map<String, dynamic>> serviceRequests =
@@ -119,20 +106,27 @@ class ServiceRequestBloc
               {
                 'accepted_by': supabaseClient.auth.currentUser!.id,
                 'status': 'accepted',
+                'payment_status': 'active',
               },
             ).eq('id', event.requestId);
+
+            Logger().e('on update event');
             add(GetAllServiceRequestsEvent());
           } else if (event.status == 'completed') {
             await queryTable
                 .update(
                   {
                     'status': 'completed',
+                    'payment_status': 'paid',
                   },
                 )
                 .eq('id', event.requestId)
                 .eq('accepted_by', supabaseClient.auth.currentUser!.id);
           }
-          add(GetAllServiceRequestsEvent());
+          Logger().e('on completed event');
+          add(GetAllServiceRequestsEvent(
+            status: 'accepted',
+          ));
         }
       } catch (e, s) {
         Logger().wtf('$e, $s');

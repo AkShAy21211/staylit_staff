@@ -198,7 +198,7 @@ class ServiceRequestCard extends StatelessWidget {
               ],
             ),
             const SizedBox(
-              height: 10,
+              height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -219,7 +219,7 @@ class ServiceRequestCard extends StatelessWidget {
               ],
             ),
             const Divider(
-              height: 30,
+              height: 10,
             ),
             Row(
               children: [
@@ -229,69 +229,56 @@ class ServiceRequestCard extends StatelessWidget {
                     text: serviceDetails['room']['room_no'],
                   ),
                 ),
-                Expanded(
-                  child: LabelWithText(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    label: 'Price',
-                    text: '₹${serviceDetails['service']['price'].toString()}',
-                  ),
-                ),
+                // Expanded(
+                //   child: LabelWithText(
+                //     crossAxisAlignment: CrossAxisAlignment.end,
+                //     label: 'Price',
+                //     text: '₹${serviceDetails['service']['price'].toString()}',
+                //   ),
+                // ),
               ],
             ),
-            const Divider(
-              height: 30,
-            ),
-            LabelWithText(
-              label: 'Payment Status',
-              text: serviceDetails['payment_status'],
-            ),
-            Divider(
-              height: serviceDetails['status'] == 'completed' ? 0 : 30,
-            ),
+            // const Divider(
+            //   height: 30,
+            // ),
+            // LabelWithText(
+            //   label: 'Payment Status',
+            //   text: serviceDetails['payment_status'],
+            // ),
             serviceDetails['status'] == 'completed'
                 ? const SizedBox()
-                : serviceDetails['status'] == 'pending'
+                : const Divider(
+                    height: 30,
+                  ),
+
+            serviceDetails['status'] == 'pending'
+                ? CustomActionButton(
+                    iconData: Icons.check_circle_outline,
+                    label: 'Accept',
+                    color: Colors.green,
+                    onPressed: () {
+                      serviceRequestBloc.add(
+                        ChangeServiceRequestStatusEvent(
+                          requestId: serviceDetails['id'],
+                          status: 'accepted',
+                        ),
+                      );
+                    },
+                  )
+                : serviceDetails['status'] == 'accepted'
                     ? CustomActionButton(
-                        iconData: Icons.check_circle_outline,
-                        label: 'Accept',
-                        color: Colors.green,
+                        iconData: Icons.done_all_outlined,
+                        label: 'Completed',
+                        color: Colors.blue[800]!,
                         onPressed: () {
-                          serviceRequestBloc.add(
-                              ChangeServiceRequestStatusEvent(
-                                  requestId: serviceDetails['id'],
-                                  status: 'accepted'));
+                          serviceRequestBloc
+                              .add(ChangeServiceRequestStatusEvent(
+                            requestId: serviceDetails['id'],
+                            status: 'completed',
+                          ));
                         },
                       )
-                    : serviceDetails['status'] == 'accepted'
-                        ? CustomActionButton(
-                            iconData: serviceDetails['status'] == 'accepted' &&
-                                    serviceDetails['payment_status'] ==
-                                        'pending'
-                                ? Icons.stop_circle
-                                : Icons.done_all_outlined,
-                            label: serviceDetails['status'] == 'accepted' &&
-                                    serviceDetails['payment_status'] ==
-                                        'pending'
-                                ? 'Payment Pending'
-                                : 'Completed',
-                            color: serviceDetails['status'] == 'accepted' &&
-                                    serviceDetails['payment_status'] ==
-                                        'pending'
-                                ? Colors.grey
-                                : Colors.blue[800]!,
-                            onPressed: serviceDetails['status'] == 'accepted' &&
-                                    serviceDetails['payment_status'] ==
-                                        'pending'
-                                ? () {}
-                                : () {
-                                    serviceRequestBloc
-                                        .add(ChangeServiceRequestStatusEvent(
-                                      requestId: serviceDetails['id'],
-                                      status: 'completed',
-                                    ));
-                                  },
-                          )
-                        : const SizedBox(),
+                    : const SizedBox(),
           ],
         ),
       ),
