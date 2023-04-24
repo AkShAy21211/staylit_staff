@@ -106,7 +106,6 @@ class ServiceRequestBloc
               {
                 'accepted_by': supabaseClient.auth.currentUser!.id,
                 'status': 'accepted',
-                'payment_status': 'active',
               },
             ).eq('id', event.requestId);
 
